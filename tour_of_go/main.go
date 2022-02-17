@@ -297,6 +297,80 @@ func TestGoroutines() {
     fmt.Println(value)
 }
 
+type Person1 struct {
+    name string
+    age uint32
+}
+
+func (p Person1) TestByValue() {
+    fmt.Printf("by value address = %p\n", &p)
+}
+
+func (p *Person1) TestByPointer() {
+    fmt.Printf("by pointer address = %p\n", p)
+}
+
+func TestMethodsAgain1() {
+    p := Person1 {
+        name: "viktor",
+        age: 10,
+    }
+
+    fmt.Printf("p address = %p\n", &p)
+    p.TestByValue()
+    p.TestByPointer()
+    (&p).TestByPointer()
+}
+
+type Geometry interface {
+    Area() float64
+    Perim() float64
+}
+
+type Rect struct {
+    w, h float64
+}
+
+func (r Rect) Area() float64 {
+    return r.w*r.h
+}
+
+func (r Rect) Perim() float64 {
+    return 2*(r.w + r.h)
+}
+
+type Circle struct {
+    r float64
+}
+
+func (c Circle) Area() float64 {
+    return 3.14 * c.r * c.r
+}
+
+func (c Circle) Perim() float64 {
+    return 2 * 3.14 * c.r
+}
+
+func TestPassGeometryInterface(g Geometry) {
+    fmt.Println(g)
+    fmt.Println(g.Area())
+    fmt.Println(g.Perim())
+
+    switch v := g.(type) {
+    case Circle:
+        fmt.Printf("this is a circle with r = %f\n", v.r)
+    case Rect:
+        fmt.Printf("this is a Rectangle (%f, %f)\n", v.h, v.w)
+    default:
+        fmt.Println("default type")
+    }
+}
+
+func TestGeometryInterfaces() {
+    c := Circle {10}
+    TestPassGeometryInterface(c)
+}
+
 func main() {
 	var i int
 	var ii int = 5
@@ -326,4 +400,6 @@ func main() {
     TestTypeSwitch()
     TestStringer()
     TestGoroutines()
+    TestMethodsAgain1()
+    TestGeometryInterfaces()
 }
