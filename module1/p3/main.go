@@ -8,4 +8,5 @@ import (
 func main() {
     fmt.Println("hello world")
     fmt.Println(p1.Func1())
+    fmt.Println(SomeFunc())
 }
