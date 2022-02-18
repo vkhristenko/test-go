@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package quickstart.codegen;
+
+option go_package = "quickstart/codegen";
+
+service TestInterface {
+    rpc Test(TestRequest)
+        returns (TestReply) {}
+}
+
+message TestRequest {}
+message TestReply {}
