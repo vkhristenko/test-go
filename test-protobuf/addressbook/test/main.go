@@ -4,6 +4,8 @@ import (
     "fmt"
     cg "github.com/vkhristenko/test-go/test-protobuf/addressbook/codegen"
     timestamppb "google.golang.org/protobuf/types/known/timestamppb"
+    p1 "github.com/vkhristenko/test-go/test-protobuf/addressbook/p1"
+    p1_p1p1 "github.com/vkhristenko/test-go/test-protobuf/addressbook/p1/p1p1"
 )
 
 func main() {
@@ -23,4 +25,7 @@ func main() {
     }
 
     fmt.Println(person.String())
+
+    fmt.Println(p1.Func())
+    fmt.Println(p1_p1p1.Func())
 }
