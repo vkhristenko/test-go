@@ -15,6 +15,21 @@ func test0() {
     fmt.Println(v)
 }
 
+func UpdateArray(a []int) {
+    a = append(a, 10)
+}
+
+func test1() {
+    arr := make([]int, 0)
+    arr = append(arr, 1)
+    arr = append(arr, 2)
+
+    fmt.Println(arr)
+    UpdateArray(arr)
+    fmt.Println(arr)
+}
+
 func main() {
     test0()
+    test1()
 }

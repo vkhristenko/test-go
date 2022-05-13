@@ -78,8 +78,47 @@ func test2() {
     fmt.Println("map: ", m)
 }
 
+type TestCopying struct {
+    Ptr *int32
+}
+
+func PrintTestCopying(s TestCopying) {
+    fmt.Printf("value = %d\n", *s.Ptr)
+}
+
+func ModTestCopying(s TestCopying) {
+    *s.Ptr += 10
+}
+
+type Data1 struct {
+    str string
+}
+
+func test3() {
+    fmt.Println("*** test3 ***")
+
+    s := TestCopying {
+        Ptr: new(int32),
+    }
+    *s.Ptr = 10
+    PrintTestCopying(s)
+    ModTestCopying(s)
+    PrintTestCopying(s)
+    ptr := &(*s.Ptr)
+    fmt.Printf("addr = %p\n", ptr)
+    *ptr += 30
+    PrintTestCopying(s)
+
+    data := Data1 {
+        str: "some string",
+    }
+    pstr := &data.str
+    fmt.Printf("member field string address = %p\n", pstr)
+}
+
 func main() {
     test0()
     test1()
     test2()
+    test3()
 }
